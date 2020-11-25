@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <title>coding quiz game</title>
+</head>
+
+<body>
+    <div class ="scores"><a href="highscores.html">View Highscores</a></div>
+    <div class ="timer">Time: <spam id="time">0</spam></div>
+    <div class ="wrapper">
+        <div id = "start-screen" class="start">
+            <h1>coding quiz chellenge</h1>
+            <p>
+                Try to answer the following code related questions within the time limit. 
+                Keep in mind that incorr answers will penalize your score/time by ten seconds.
+            </p>
+            <button id="start">Start Quiz</button>
+        </div>
+
+        <div id="questions" class="hide">
+            <h2 id="question-title"></h2>
+            <div id="choices" class="choices">
+                <p id="anser-1"></p>
+                <p id="anser-2"></p>
+                <p id="anser-3"></p>
+                <p id="anser-4"></p>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script src="./jcript.js"></script>
+</html>
