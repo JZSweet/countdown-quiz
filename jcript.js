@@ -1,27 +1,81 @@
-console.log("hallo world")
-// place qustions on the page
-var qs = [
-    {title:"1+2", answe1:"3"}, 
-   {title:"4+3", answe1:"10"}, 
-   {title:"1+2", answe1:"3"}, 
-   {title:"1+2", answe1:"3"}, 
+// The array of questions for quiz.
+var questionsCont = [
+    {
+        title: "commonly used data types DO NOT include:",
+        answers: [
+            { text: "strings", correct: false },
+            { text: "booleans", correct: false },
+            { text: "alerts", correct: true },
+            { text: "numbers", correct: false },
+        ]
+    },
+    {
+        title: "The condition in an if/else statement is enclosed within___. ",
+        answers: [
+            { text: "quotes", correct: false },
+            { text: "curly brackets", correct: false },
+            { text: "parentheses", correct: true },
+            { text: "square brackets", correct: false },
+        ]
+    },
+    {
+        title: "Arrays in javaScript can be used to store___.",
+        answers: [
+            { text: "numbers and strings", correct: false },
+            { text: "booleans", correct: false },
+            { text: "other arrays", correct: false },
+            { text: "all of the above", correct: true },
+        ]
+    },
+    {
+        title: "strings values must be enclosed within ___ when being assigned to variables.",
+        answers: [
+            { text: "commas", correct: false },
+            { text: "curly brackets", correct: false },
+            { text: "quotes", correct: true },
+            { text: "parentheses", correct: false },
+        ]
+    },
+    {
+        title: "a very useful tool used during development and debugging for printing content to the debugger is:",
+        answers: [
+            { text: "javaScript", correct: false },
+            { text: "terminal/bash", correct: false },
+            { text: "for loops", correct: false },
+            { text: "console.log", correct: true },
+        ]
+    },
 ]
-var qindex = 0
-function qustionsholder(){
-
-    document.querySelector("#question-title").innerHTML = qs[qindex].title;
-    document.querySelector("#anser-1").innerHTML = qs[qindex].answe1
-    document.querySelector("#anser-2").innerHTML = "5";
-    document.querySelector("#anser-3").innerHTML = "8";
-    document.querySelector("#anser-4").innerHTML = "10";
+// start the game with score of 0.
+var score = 0;
+// Loop over every question.
+for (var i = 0; i < questionsCont.length; i++) {
+    
+    if ((answers === true );  
+        score++;
+        alert("Correct!");
+    else {
+        alert("Wrong!");
+    }
 }
-qustionsholder()
-document.querySelector("#start").addEventListener("click",function(){
-    qindex++ 
-    qustionsholder()
-})
-// decide if answers cerct
-// count scort
-// save scort
-// start timer/decreas timer/
-//  end time
+
+// Show total score at end
+alert("You got " + score + "/" + questionsCont.length);
+
+
+// set timer
+var timeEl = document.querySelector("#time");
+var secondsLeft = 50;
+
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            sendMessage();
+        }
+    }, 1000);
+}
+
+setTime();
