@@ -46,36 +46,46 @@ var questionsCont = [
         ]
     },
 ]
+// place questions to html
+var qindex = 0
+function qustionsholder() {
+    document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
+    document.querySelector("#answer-buttons").innerHTML = questionsCont[qindex].answers;
+
+qustionsholder()
+document.querySelector("#start").addEventListener("click", function () {
+    qindex++
+    qustionsholder()
+})
+
 // start the game with score of 0.
 var score = 0;
 // Loop over every question.
 for (var i = 0; i < questionsCont.length; i++) {
-    
-    if ((answers === true );  
+    if (answers === true) {
         score++;
         alert("Correct!");
-    else {
+    } else {
         alert("Wrong!");
     }
 }
-
 // Show total score at end
 alert("You got " + score + "/" + questionsCont.length);
 
 
 // set timer
-var timeEl = document.querySelector("#time");
+var timeEl = document.getElementById("countdown");
 var secondsLeft = 50;
 
 function setTime() {
     var timerInterval = setInterval(function () {
+         timeEl = secondsLeft + " seconds remaining";
         secondsLeft--;
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            sendMessage();
         }
     }, 1000);
 }
 
-setTime();
+setTime()
