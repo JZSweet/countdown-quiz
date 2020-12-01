@@ -46,54 +46,6 @@ var questionsCont = [
         ]
     },
 ]
-// place questions to html
-var qindex = 0
-function qustionsholder() {
-    document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
-    document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
-    document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
-    document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
-    document.querySelector("#btn4").innerHTML = questionsCont[qindex].answers[3].text;
-
-}
-document.querySelector("#btn1").addEventListener("click",function(){
-
-    console.log("btn",questionsCont[qindex].answers[0].correct)
-} );
-document.querySelector("#btn2").addEventListener("click",function(){
-
-    console.log("btn",questionsCont[qindex].answers[1].correct)
-} );
-document.querySelector("#btn3").addEventListener("click",function(){
-
-    console.log("btn",questionsCont[qindex].answers[2].correct)
-} );
-document.querySelector("#btn4").addEventListener("click",function(){
-
-    console.log("btn",questionsCont[qindex].answers[3].correct)
-} );
-
-
-// qustionsholder()
-document.querySelector("#start").addEventListener("click", function () {
-    qindex++
-    qustionsholder()
-})
-
-// start the game with score of 0.
-var score = 0;
-// Loop over every question.
-// for (var i = 0; i < questionsCont.length; i++) {
-//     if (questionsCont[qindex].answers === true) {
-//         score++;
-//         alert("Correct!");
-//     } else {
-//         alert("Wrong!");
-//     }
-// }
-// Show total score at end
-// alert("You got " + score + "/" + questionsCont.length);
-
 
 // set timer
 var timeEl = document.getElementById("countdown");
@@ -106,11 +58,96 @@ function setTime() {
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
+            endGame;
         }
     }, 1000);
 }
 
-setTime()
+// place questions to html
+var qindex = 0
+function qustionsholder() {
+    document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
+    document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
+    document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
+    document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
+    document.querySelector("#btn4").innerHTML = questionsCont[qindex].answers[3].text;
+}
+
+// start quiz
+document.querySelector("#start").addEventListener("click", function () {
+    qindex++
+    qustionsholder()
+    setTime()
+})
+
+var score = 0;
+document.querySelector("#btn1").addEventListener("click", function () {
+    console.log("btn", questionsCont[qindex].answers[0].correct)
+    if (questionsCont[qindex].answers[0].correct === true) {
+        score++;
+        alert("Correct!");
+    } else {
+        secondsLeft--;
+        alert("Wrong!");
+    }
+});
+
+document.querySelector("#btn2").addEventListener("click", function () {
+    console.log("btn", questionsCont[qindex].answers[1].correct)
+    if (questionsCont[qindex].answers[1].correct === true) {
+        score++;
+        alert("Correct!");
+    } else {
+        secondsLeft--;
+        alert("Wrong!");
+    }
+});
+document.querySelector("#btn3").addEventListener("click", function () {
+    console.log("btn", questionsCont[qindex].answers[2].correct)
+    if (questionsCont[qindex].answers[2].correct === true) {
+        score++;
+        alert("Correct!");
+    } else {
+        secondsLeft--;
+        alert("Wrong!");
+    }
+});
+document.querySelector("#btn4").addEventListener("click", function () {
+    console.log("btn", questionsCont[qindex].answers[3].correct)
+    if (questionsCont[qindex].answers[3].correct === true) {
+        score++;
+        alert("Correct!");
+    } else {
+        secondsLeft--;
+        alert("Wrong!");
+    }
+});
+
+
+// end quiz
+function endGame() {
+    document.querySelector("end-screen");
+}
+
 
 // submit score
-var signUpButton = document.querySelector("#sign-up");
+function renderLastRegistered() {
+    var score = localStorage.getItem("final-score");
+    var initials = localStorage.getItem("initials");
+
+    if (!score || !initials) {
+        return;
+    }
+    ScoreSpan.textContent = score;
+    initialsSpan.textContent = initials;
+}
+
+var signUpButton = document.querySelector("#submit");
+var initials = document.querySelector("#initials");
+
+signUpButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    localStorage.setItem("final-score", score);
+    localStorage.setItem("initials", initials);
+    renderLastRegistered();
+})
