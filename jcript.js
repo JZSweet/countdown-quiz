@@ -50,9 +50,31 @@ var questionsCont = [
 var qindex = 0
 function qustionsholder() {
     document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
-    document.querySelector("#answer-buttons").innerHTML = questionsCont[qindex].answers;
+    document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
+    document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
+    document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
+    document.querySelector("#btn4").innerHTML = questionsCont[qindex].answers[3].text;
 
-qustionsholder()
+}
+document.querySelector("#btn1").addEventListener("click",function(){
+
+    console.log("btn",questionsCont[qindex].answers[0].correct)
+} );
+document.querySelector("#btn2").addEventListener("click",function(){
+
+    console.log("btn",questionsCont[qindex].answers[1].correct)
+} );
+document.querySelector("#btn3").addEventListener("click",function(){
+
+    console.log("btn",questionsCont[qindex].answers[2].correct)
+} );
+document.querySelector("#btn4").addEventListener("click",function(){
+
+    console.log("btn",questionsCont[qindex].answers[3].correct)
+} );
+
+
+// qustionsholder()
 document.querySelector("#start").addEventListener("click", function () {
     qindex++
     qustionsholder()
@@ -61,16 +83,16 @@ document.querySelector("#start").addEventListener("click", function () {
 // start the game with score of 0.
 var score = 0;
 // Loop over every question.
-for (var i = 0; i < questionsCont.length; i++) {
-    if (answers === true) {
-        score++;
-        alert("Correct!");
-    } else {
-        alert("Wrong!");
-    }
-}
+// for (var i = 0; i < questionsCont.length; i++) {
+//     if (questionsCont[qindex].answers === true) {
+//         score++;
+//         alert("Correct!");
+//     } else {
+//         alert("Wrong!");
+//     }
+// }
 // Show total score at end
-alert("You got " + score + "/" + questionsCont.length);
+// alert("You got " + score + "/" + questionsCont.length);
 
 
 // set timer
@@ -79,7 +101,7 @@ var secondsLeft = 50;
 
 function setTime() {
     var timerInterval = setInterval(function () {
-         timeEl = secondsLeft + " seconds remaining";
+        timeEl.innerHTML = secondsLeft + " seconds remaining";
         secondsLeft--;
 
         if (secondsLeft === 0) {
@@ -89,3 +111,6 @@ function setTime() {
 }
 
 setTime()
+
+// submit score
+var signUpButton = document.querySelector("#sign-up");
