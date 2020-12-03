@@ -1,3 +1,26 @@
+// set timer
+var startButton = document.getElementById("start");
+var timeEl = document.getElementById("countdown");
+var secondsLeft = 50;
+
+function setTime() {
+    var timerInterval = setInterval(function () {
+        timeEl.textContent = secondsLeft + " seconds remaining";
+        secondsLeft--;
+        
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            return window.location.assign("./highscores.html");
+        }
+    }, 1000);
+}
+// start button
+startButton.addEventListener("click",function () {
+    qindex++
+    qustionsholder()
+    setTime()
+})
+
 // The array of questions for quiz.
 var questionsCont = [
     {
@@ -47,22 +70,6 @@ var questionsCont = [
     },
 ]
 
-// set timer
-var timeEl = document.getElementById("countdown");
-var secondsLeft = 50;
-
-function setTime() {
-    var timerInterval = setInterval(function () {
-        timeEl.innerHTML = secondsLeft + " seconds remaining";
-        secondsLeft--;
-
-        if (secondsLeft === 0) {
-            clearInterval(timerInterval);
-            endGame;
-        }
-    }, 1000);
-}
-
 // place questions to html
 var qindex = 0
 function qustionsholder() {
@@ -74,20 +81,16 @@ function qustionsholder() {
 }
 
 // start quiz
-document.querySelector("#start").addEventListener("click", function () {
-    qindex++
-    qustionsholder()
-    setTime()
-})
-
+var name = document.getElementById("initials");
+var finalScore = document. getElementById("final-score");
 var score = 0;
-document.querySelector("#btn1").addEventListener("click", function () {
+document.querySelector(".btn").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[0].correct)
     if (questionsCont[qindex].answers[0].correct === true) {
         score++;
         alert("Correct!");
     } else {
-        secondsLeft--;
+        secondsLeft-10;
         alert("Wrong!");
     }
 });
@@ -98,7 +101,7 @@ document.querySelector("#btn2").addEventListener("click", function () {
         score++;
         alert("Correct!");
     } else {
-        secondsLeft--;
+        secondsLeft-10;
         alert("Wrong!");
     }
 });
@@ -108,7 +111,7 @@ document.querySelector("#btn3").addEventListener("click", function () {
         score++;
         alert("Correct!");
     } else {
-        secondsLeft--;
+        secondsLeft-10;
         alert("Wrong!");
     }
 });
@@ -118,16 +121,10 @@ document.querySelector("#btn4").addEventListener("click", function () {
         score++;
         alert("Correct!");
     } else {
-        secondsLeft--;
+        secondsLeft - 10;
         alert("Wrong!");
     }
 });
-
-
-// end quiz
-function endGame() {
-    document.querySelector("end-screen");
-}
 
 
 // submit score
