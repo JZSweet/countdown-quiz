@@ -16,8 +16,8 @@ function setTime() {
 }
 // start button
 startButton.addEventListener("click",function () {
-    qindex++
-    qustionsholder()
+    document.getElementById("start-screen").style.display="none";
+ showQuestion()
     setTime()
 })
 
@@ -72,20 +72,28 @@ var questionsCont = [
 
 // place questions to html
 var qindex = 0
-function qustionsholder() {
+function showQuestion() {
     document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
     document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
     document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
     document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
     document.querySelector("#btn4").innerHTML = questionsCont[qindex].answers[3].text;
 }
+let answerBtn = document.querySelectorAll(".tnb")
+answerBtn.forEach((button) => {
+    button.addEventListener("click")
+});
 
 // start quiz
+
+
+
 var name = document.getElementById("initials");
 var finalScore = document. getElementById("final-score");
 var score = 0;
-document.querySelector(".btn").addEventListener("click", function () {
+document.querySelector("#btn1").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[0].correct)
+    console.log(questionsCont[qindex].title)
     if (questionsCont[qindex].answers[0].correct === true) {
         score++;
         alert("Correct!");
@@ -93,6 +101,8 @@ document.querySelector(".btn").addEventListener("click", function () {
         secondsLeft-10;
         alert("Wrong!");
     }
+    qindex++
+    showQuestion()
 });
 
 document.querySelector("#btn2").addEventListener("click", function () {
@@ -104,6 +114,8 @@ document.querySelector("#btn2").addEventListener("click", function () {
         secondsLeft-10;
         alert("Wrong!");
     }
+    qindex++
+    showQuestion()
 });
 document.querySelector("#btn3").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[2].correct)
@@ -114,6 +126,8 @@ document.querySelector("#btn3").addEventListener("click", function () {
         secondsLeft-10;
         alert("Wrong!");
     }
+    qindex++
+    showQuestion()
 });
 document.querySelector("#btn4").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[3].correct)
@@ -124,6 +138,8 @@ document.querySelector("#btn4").addEventListener("click", function () {
         secondsLeft - 10;
         alert("Wrong!");
     }
+    qindex++
+    showQuestion()
 });
 
 
@@ -146,5 +162,5 @@ signUpButton.addEventListener("click", function (event) {
     event.preventDefault();
     localStorage.setItem("final-score", score);
     localStorage.setItem("initials", initials);
-    renderLastRegistered();
 })
+renderLastRegistered();
