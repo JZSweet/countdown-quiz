@@ -75,11 +75,11 @@ var questionsCont = [
 // place questions to html
 var qindex = 0
 function showQuestion() {
-    document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
     if (qindex > 4) {
         clearInterval(timerInterval);
-        return window.location.assign("./highscores.html");
+        return window.location = "./highscores.html";
     };
+    document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
     document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
     document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
     document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
