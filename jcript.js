@@ -1,4 +1,5 @@
 // set timer
+document.getElementById("questions-container").style.display = "none"; 
 var startButton = document.getElementById("start");
 var timeEl = document.getElementById("countdown");
 var secondsLeft = 50;
@@ -7,7 +8,7 @@ function setTime() {
     var timerInterval = setInterval(function () {
         timeEl.textContent = secondsLeft + " seconds remaining";
         secondsLeft--;
-        
+
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
             return window.location.assign("./highscores.html");
@@ -15,9 +16,10 @@ function setTime() {
     }, 1000);
 }
 // start button
-startButton.addEventListener("click",function () {
-    document.getElementById("start-screen").style.display="none";
- showQuestion()
+startButton.addEventListener("click", function () {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("questions-container").style.display = "block";
+    showQuestion()
     setTime()
 })
 
@@ -74,6 +76,10 @@ var questionsCont = [
 var qindex = 0
 function showQuestion() {
     document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
+    if (qindex > 4) {
+        clearInterval(timerInterval);
+        return window.location.assign("./highscores.html");
+    };
     document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
     document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
     document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
@@ -84,22 +90,20 @@ answerBtn.forEach((button) => {
     button.addEventListener("click")
 });
 
+
+
+
 // start quiz
-
-
-
 var name = document.getElementById("initials");
-var finalScore = document. getElementById("final-score");
+var finalScore = document.getElementById("final-score");
 var score = 0;
 document.querySelector("#btn1").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[0].correct)
     console.log(questionsCont[qindex].title)
     if (questionsCont[qindex].answers[0].correct === true) {
         score++;
-        alert("Correct!");
     } else {
-        secondsLeft-10;
-        alert("Wrong!");
+        secondsLeft - 10;
     }
     qindex++
     showQuestion()
@@ -109,10 +113,8 @@ document.querySelector("#btn2").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[1].correct)
     if (questionsCont[qindex].answers[1].correct === true) {
         score++;
-        alert("Correct!");
     } else {
-        secondsLeft-10;
-        alert("Wrong!");
+        secondsLeft - 10;
     }
     qindex++
     showQuestion()
@@ -121,10 +123,8 @@ document.querySelector("#btn3").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[2].correct)
     if (questionsCont[qindex].answers[2].correct === true) {
         score++;
-        alert("Correct!");
     } else {
-        secondsLeft-10;
-        alert("Wrong!");
+        secondsLeft - 10;
     }
     qindex++
     showQuestion()
@@ -133,10 +133,8 @@ document.querySelector("#btn4").addEventListener("click", function () {
     console.log("btn", questionsCont[qindex].answers[3].correct)
     if (questionsCont[qindex].answers[3].correct === true) {
         score++;
-        alert("Correct!");
     } else {
         secondsLeft - 10;
-        alert("Wrong!");
     }
     qindex++
     showQuestion()
