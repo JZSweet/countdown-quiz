@@ -1,5 +1,5 @@
 // set timer
-document.getElementById("questions-container").style.display = "none"; 
+document.getElementById("questions-container").style.display = "none";
 var startButton = document.getElementById("start");
 var timeEl = document.getElementById("countdown");
 var secondsLeft = 50;
@@ -77,7 +77,7 @@ var qindex = 0
 function showQuestion() {
     if (qindex > 4) {
         clearInterval(timerInterval);
-        return window.location = "./highscores.html";
+        return window.location.assign("./highscores.html");
     };
     document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
     document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
