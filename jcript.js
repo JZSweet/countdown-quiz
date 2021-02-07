@@ -1,19 +1,25 @@
 // set timer
-document.getElementById("questions-container").style.display = "none";
+document.querySelector("#questions-container").style.display = "none";
 var startButton = document.getElementById("start");
 var timeEl = document.getElementById("countdown");
 var secondsLeft = 50;
+var timerInterval 
+var score = 0;
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         timeEl.textContent = secondsLeft + " seconds remaining";
         secondsLeft--;
-
+        
         if (secondsLeft === 0) {
-            clearInterval(timerInterval);
-            return window.location.assign("./highscores.html");
+            endgame();
         }
     }, 1000);
+}
+function endgame() {
+    clearInterval(timerInterval);
+    localStorage.setItem("final-score",score);
+    return window.location.assign("./highscores.html");
 }
 // start button
 startButton.addEventListener("click", function () {
@@ -75,15 +81,14 @@ var questionsCont = [
 // place questions to html
 var qindex = 0
 function showQuestion() {
-    if (qindex > 4) {
-        clearInterval(timerInterval);
-        return window.location.assign("./highscores.html");
-    };
     document.querySelector("#question-title").innerHTML = questionsCont[qindex].title;
     document.querySelector("#btn1").innerHTML = questionsCont[qindex].answers[0].text;
     document.querySelector("#btn2").innerHTML = questionsCont[qindex].answers[1].text;
     document.querySelector("#btn3").innerHTML = questionsCont[qindex].answers[2].text;
     document.querySelector("#btn4").innerHTML = questionsCont[qindex].answers[3].text;
+    if (qindex === questionsCont.length - 1) {
+        endgame();
+    };
 }
 let answerBtn = document.querySelectorAll(".tnb")
 answerBtn.forEach((button) => {
@@ -93,13 +98,10 @@ answerBtn.forEach((button) => {
 
 
 
-// start quiz
+// count score
 var name = document.getElementById("initials");
 var finalScore = document.getElementById("final-score");
-var score = 0;
 document.querySelector("#btn1").addEventListener("click", function () {
-    console.log("btn", questionsCont[qindex].answers[0].correct)
-    console.log(questionsCont[qindex].title)
     if (questionsCont[qindex].answers[0].correct === true) {
         score++;
     } else {
@@ -110,7 +112,6 @@ document.querySelector("#btn1").addEventListener("click", function () {
 });
 
 document.querySelector("#btn2").addEventListener("click", function () {
-    console.log("btn", questionsCont[qindex].answers[1].correct)
     if (questionsCont[qindex].answers[1].correct === true) {
         score++;
     } else {
@@ -120,7 +121,6 @@ document.querySelector("#btn2").addEventListener("click", function () {
     showQuestion()
 });
 document.querySelector("#btn3").addEventListener("click", function () {
-    console.log("btn", questionsCont[qindex].answers[2].correct)
     if (questionsCont[qindex].answers[2].correct === true) {
         score++;
     } else {
@@ -130,7 +130,6 @@ document.querySelector("#btn3").addEventListener("click", function () {
     showQuestion()
 });
 document.querySelector("#btn4").addEventListener("click", function () {
-    console.log("btn", questionsCont[qindex].answers[3].correct)
     if (questionsCont[qindex].answers[3].correct === true) {
         score++;
     } else {
@@ -139,26 +138,3 @@ document.querySelector("#btn4").addEventListener("click", function () {
     qindex++
     showQuestion()
 });
-
-
-// submit score
-function renderLastRegistered() {
-    var score = localStorage.getItem("final-score");
-    var initials = localStorage.getItem("initials");
-
-    if (!score || !initials) {
-        return;
-    }
-    ScoreSpan.textContent = score;
-    initialsSpan.textContent = initials;
-}
-
-var signUpButton = document.querySelector("#submit");
-var initials = document.querySelector("#initials");
-
-signUpButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    localStorage.setItem("final-score", score);
-    localStorage.setItem("initials", initials);
-})
-renderLastRegistered();
