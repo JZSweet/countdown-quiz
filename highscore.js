@@ -11,9 +11,7 @@ signUpButton.addEventListener("click", function () {
     localStorage.setItem("user-name", initials);
 });
 
-function getPassScore () {
-    var inDisplay = localStorage.getItem("user-name");
-    var scDisplay = localStorage.getItem("final-score");
-    document.querySelector("#past-score").append(inDisplay + "-" + scDisplay);
-};
-getPassScore();
+
+var inDisplay = localStorage.getItem("user-name");
+var scDisplay = localStorage.getItem("final-score");
+document.querySelector("#past-score").append(inDisplay + "-" + scDisplay);
