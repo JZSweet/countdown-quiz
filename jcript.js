@@ -95,9 +95,6 @@ answerBtn.forEach((button) => {
     button.addEventListener("click")
 });
 
-
-
-
 // count score
 var name = document.getElementById("initials");
 var finalScore = document.getElementById("final-score");

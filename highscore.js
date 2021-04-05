@@ -6,9 +6,18 @@ userScore.append(score);
 var signUpButton = document.querySelector("#submit");
 signUpButton.addEventListener("click", function () {
     var initials = document.querySelector("#initials").value;
+    var listEntry = {name: initials, score: score};
+    var pastPlayers = JSON.parse(localStorage.getItem("user-names"));
+    if(pastPlayers){
+        console.log(pastPlayers);
+        pastPlayers[pastPlayers.length] = listEntry;
+        localStorage.setItem("user-names", JSON.stringify(pastPlayers));
+    } else {
+        var initialList = []
+        initialList[0] = listEntry;
+        localStorage.setItem("user-names", JSON.stringify(initialList));
+    }
     playerDisplay.append(initials + " your score is: " + score)
-    localStorage.setItem("final-score", score);
-    localStorage.setItem("user-name", initials);
 });
 
 
