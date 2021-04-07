@@ -18,9 +18,5 @@ signUpButton.addEventListener("click", function () {
         localStorage.setItem("user-names", JSON.stringify(initialList));
     }
     playerDisplay.append(initials + " your score is: " + score)
+    document.querySelector("#past-score").append(JSON.stringify(pastPlayers));
 });
-
-
-var inDisplay = localStorage.getItem("user-name");
-var scDisplay = localStorage.getItem("final-score");
-document.querySelector("#past-score").append(inDisplay + "-" + scDisplay);
